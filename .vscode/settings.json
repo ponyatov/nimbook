@@ -41,7 +41,7 @@
 
     "files.exclude": {
         "bin": true, "include":true, "lib*":true, "share":true, "pyvenv.cfg":true,
-        "**/*.pyc": true, "**/docs/**":true,
+        "**/*.pyc": true,
     },
 
     "editor.tabSize": 4,
