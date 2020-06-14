@@ -14,10 +14,22 @@ PORT	?= 19999
 
 WGET	= wget -c --no-check-certificate
 
+PANDOC	= /usr/bin/pandoc
 
+
+HTML  = docs/index.html
+HTML += docs/README.html
+HTML += docs/HowWrite.html
+# HTML += docs/Как\ стать\ соавтором.html
 
 .PHONY: all
-all: hello
+all: $(HTML)
+
+docs/index.html: $(PANDOC) wiki/Home.md pandoc.py Makefile
+	$(PANDOC) wiki/Home.md -f gfm -t json | $(PY) pandoc.py > $@.json
+#	cat $@.json | $(PANDOC) -s -f json -t html -o $@ --metadata title=$(MODULE)
+docs/%.html: $(PANDOC) wiki/%.md
+	$^ -f gfm -t html -o $@
 
 .PHONY: hello
 hello:$(NIMBLE)
@@ -55,6 +67,7 @@ debian:
 .PHONY: master shadow release zip wiki
 
 MERGE  = Makefile README.md .gitignore .vscode apt.txt requirements.txt
+MERGE += wiki docs
 
 master:
 	git checkout $@
@@ -72,4 +85,6 @@ zip:
 	git archive --format zip --output $(MODULE)_src_$(NOW)_$(REL).zip HEAD
 
 wiki:
-	$(MAKE) -C $@
+	cd $@ ; git pull -v
+	git add -f wiki/*
+	cd $@ ; git push -v

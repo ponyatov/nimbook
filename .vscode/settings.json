@@ -20,7 +20,7 @@
             "sequence": [
                 "workbench.action.files.saveAll",
                 // "workbench.action.terminal.focus",
-                {"command": "workbench.action.terminal.sendSequence","args": {"text": "\u000Dclear ; make test \u000D"}}
+                {"command": "workbench.action.terminal.sendSequence","args": {"text": "\u000Dclear ; make wiki \u000D"}}
             ],
         },
         // {
@@ -47,6 +47,7 @@
     "editor.tabSize": 4,
 
     "files.associations": {
-        "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+        "**/requirements{/**,*}.{txt,in}": "pip-requirements",
+        "**{/**,*}.md": "markdown",
     },
 }
