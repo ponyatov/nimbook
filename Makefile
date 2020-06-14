@@ -1,7 +1,11 @@
+# текущий каталог
 CWD		= $(CURDIR)
+# имя пакета
 MODULE	= $(notdir $(CWD))
 
+# дата (для .zip)
 NOW		= $(shell date +%d%m%y)
+# версия сборки (короткий git hash)
 REL		= $(shell git rev-parse --short=4 HEAD)
 
 PIP		= $(CWD)/bin/pip3
@@ -9,8 +13,9 @@ PY		= $(CWD)/bin/python3
 
 NIMBLE	= $(HOME)/.nimble/bin/nimble
 
-IP		?= 127.0.0.1
-PORT	?= 19999
+# сетевые настройки для веб-сервера по умолчанию
+IP     ?= 127.0.0.1
+PORT   ?= 19999
 
 WGET	= wget -c --no-check-certificate
 
@@ -22,8 +27,9 @@ HTML += docs/README.html
 HTML += docs/HowWrite.html
 # HTML += docs/Как\ стать\ соавтором.html
 
+# первое правило: по умолчанию, будет использовано при запуске make без параметров
 .PHONY: all
-all: $(HTML)
+all: hello
 
 docs/index.html: $(PANDOC) wiki/Home.md pandoc.py Makefile
 	$(PANDOC) wiki/Home.md -f gfm -t json | $(PY) pandoc.py > $@.json
@@ -32,15 +38,19 @@ docs/%.html: $(PANDOC) wiki/%.md
 	$^ -f gfm -t html -o $@
 
 .PHONY: hello
-hello:$(NIMBLE)
+hello: $(NIMBLE)
 	cd $@ ; $< build ; ./$@
 
 
+
+# установка ПО
 
 .PHONY: install
 install: debian $(PIP)
 	$(PIP) install    -r requirements.txt
 	$(MAKE) requirements.txt
+
+# обновление ПО
 
 .PHONY: update
 update: debian $(PIP)

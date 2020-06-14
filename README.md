@@ -8,4 +8,6 @@ github: https://github.com/ponyatov/nimbook
 
 discord: https://discord.com/channels/721619574486728764/721619992327487499
 
+telegram: https://t.me/ru_nim_talks
+
 gitpages: https://ponyatov.github.io/nimbook
