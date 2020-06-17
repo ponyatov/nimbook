@@ -36,3 +36,12 @@ requires "nim >= 1.2.0"
 ## использование сторонней библиотеки, без указания версии
 requires "ncurses"
 ```
+
+## `src/hello.nim`
+
+```nim
+when isMainModule:
+  echo("Hello, World!")
+```
+
+[[логирование]]

@@ -12,6 +12,7 @@ PIP		= $(CWD)/bin/pip3
 PY		= $(CWD)/bin/python3
 
 NIMBLE	= $(HOME)/.nimble/bin/nimble
+PRETTY	= $(HOME)/.nimble/bin/nimpretty
 
 # сетевые настройки для веб-сервера по умолчанию
 IP     ?= 127.0.0.1
@@ -29,7 +30,7 @@ HTML += docs/HowWrite.html
 
 # первое правило: по умолчанию, будет использовано при запуске make без параметров
 .PHONY: all
-all: hello
+all: metalcore
 
 docs/index.html: $(PANDOC) wiki/Home.md pandoc.py Makefile
 	$(PANDOC) wiki/Home.md -f gfm -t json | $(PY) pandoc.py > $@.json
@@ -39,7 +40,12 @@ docs/%.html: $(PANDOC) wiki/%.md
 
 .PHONY: hello
 hello: $(NIMBLE)
-	cd $@ ; $< build ; ./$@
+	$(MAKE) -C $@
+#	cd $@ ; $< build ; ./$@
+
+.PHONY: metalcore
+metalcore: $(NIMBLE)
+	$(MAKE) -C $@
 
 
 
@@ -72,12 +78,17 @@ debian:
 	sudo apt update
 	sudo apt install -u `cat apt.txt`
 
+$(NIMBLE):
+	curl https://nim-lang.org/choosenim/init.sh -sSf | sh
+
 
 
 .PHONY: master shadow release zip wiki
 
 MERGE  = Makefile README.md .gitignore .vscode apt.txt requirements.txt
 MERGE += wiki docs
+# MERGE += src tests
+MERGE += hello nims macG4
 
 master:
 	git checkout $@

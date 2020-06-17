@@ -6,4 +6,5 @@
   * [[Cortex-M]] | [[STM32]] MCU
 * [[MIPS RT5350F]]
 * [[AVR8 ATmega]] | [[Ородруина]]
+* [[PowerPC]] @ [[Mac Mini G4]]
 * [[IoT-платформа]]
