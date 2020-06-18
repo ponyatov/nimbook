@@ -1,12 +1,19 @@
 QEMU  = qemu-system-ppc
 ARGS  = -M mac99 -m 512M
+# hdd
 HDA   = tiger10.hda
-ARGS += -hda $(HDA) -boot c -netdev user,id=mynet0 -device rtl8139,netdev=mynet0
-ARGS += -device usb-kbd -device usb-mouse -localtime
+ARGS += -hda $(HDA) -boot c
+# network
+ARGS += -netdev user,id=mynet0 -device rtl8139,netdev=mynet0
+# misc
+ARGS += -device usb-kbd -device usb-mouse
+# -localtime
+# verbose
+ARGS += -prom-env boot-args=-v
 
-all: run
+all: emu
 
-run: $(HDA)
+emu: $(HDA)
 	$(QEMU)	$(ARGS)
 
 $(HDA):

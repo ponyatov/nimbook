@@ -10,5 +10,5 @@
 платформы: Windows (Win32 API), Linux/macOS (GTK+ 3)
 ## [[NimQML]]
 платформы: Windows, macOS, Linux, *Android*, iOS
-## [[NimboVision]] под ncurses/X11/GDI
+## [[NimboVision]] под ncurses/[[X11]]/GDI
 платформы: ориентация на TUI: интерфейс на всевдографике в текстовой консоли

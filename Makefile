@@ -106,6 +106,9 @@ zip:
 	git archive --format zip --output $(MODULE)_src_$(NOW)_$(REL).zip HEAD
 
 wiki:
+	git pull -v
 	cd $@ ; git pull -v
 	git add -f wiki/*
 	cd $@ ; git push -v
+	git push -v
+
